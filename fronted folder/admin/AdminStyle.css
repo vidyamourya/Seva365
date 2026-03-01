@@ -1,3 +1,30 @@
+:root {
+  --sidebar-w: 240px;
+
+  /* Backgrounds */
+  --bg:       #f4f6fb;
+  --card:     #ffffff;
+  --navy:     #1e2a4a;
+
+  /* Accent */
+  --gold:     #f5a623;
+
+  /* Text */
+  --text:     #1e2a4a;
+  --muted:    #8892a4;
+
+  /* Status colours */
+  --green:       #16a34a;
+  --green-bg:    #dcfce7;
+  --yellow:      #d97706;
+  --yellow-bg:   #fef3c7;
+  --red:         #dc2626;
+  --red-bg:      #fee2e2;
+
+  /* Misc */
+  --border:   #e8ecf4;
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
