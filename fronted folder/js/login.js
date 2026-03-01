@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("Login Successful!");
 
         if (data.role === "admin") {
-            window.location.href = "admin/admin";
+            window.location.href = "/admin";
         } else {
             window.location.href = "user_home";
         }

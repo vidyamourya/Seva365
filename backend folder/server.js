@@ -16,6 +16,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
+app.use(express.static(frontendPath));
 //middleware function used for page restrication 
 function isAuthenticated(req, res, next) {
   if (req.session.user) {
@@ -36,7 +37,7 @@ app.get("/", (req, res) => {
   if (req.session.user) {
 
     if (req.session.user.role === "admin") {
-      return res.redirect("/admin/admin.html");
+      return res.redirect("/admin");
     } else {
       return res.redirect("/user_home");
     }
@@ -57,6 +58,19 @@ app.get("/SignUp", (req, res) => {
 app.get('/booking',isAuthenticated, (req, res)=>{
   res.sendFile(path.join(frontendPath, 'booking.html'));
 });
+app.get('/cooking',isAuthenticated, (req, res)=>{
+  res.sendFile(path.join(frontendPath, 'cooking.html'));
+});
+app.get('/cleaning',isAuthenticated, (req, res)=>{
+  res.sendFile(path.join(frontendPath, 'cleaning.html'));
+});
+app.get('/event_management',isAuthenticated, (req, res)=>{
+  res.sendFile(path.join(frontendPath, 'event_management.html'));
+});
+app.get('/admin',isAuthenticated, (req, res)=>{
+  res.sendFile(path.join(frontendPath, "admin/admin.html"));
+});
+
 app.get("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
