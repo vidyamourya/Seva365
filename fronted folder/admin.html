@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Seva365 — Admin Dashboard</title>
+  <link rel="stylesheet" href="AdminStyle.css"/>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-badge">S365</div>
+    <div class="logo-text">Seva<span>365</span></div>
+  </div>
+
+  <div class="sidebar-label">Main</div>
+  <div class="nav-item active"><span class="nav-icon">📊</span> Dashboard</div>
+  <div class="nav-item"><span class="nav-icon">📋</span> All Bookings <span class="nav-badge" id="pendingBadge">0</span></div>
+  <div class="nav-item"><span class="nav-icon">👥</span> Users</div>
+
+  <div class="sidebar-label">Services</div>
+  <div class="nav-item"><span class="nav-icon">🍳</span> Cooking</div>
+  <div class="nav-item"><span class="nav-icon">🧹</span> Cleaning</div>
+  <div class="nav-item"><span class="nav-icon">🎉</span> Events</div>
+
+  <div class="sidebar-label">Account</div>
+  <div class="nav-item" onclick="window.location.href='index.html'"><span class="nav-icon">🚪</span> Back to Site</div>
+
+  <div class="sidebar-bottom">
+    <div class="admin-chip">
+      <div class="admin-avatar">A</div>
+      <div class="admin-info">
+        <p>Admin</p>
+        <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9ceff9eafdafaaa9dcfdf8f1f5f2b2f5f2">[email&#160;protected]</a></span>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- TOAST NOTIFICATIONS -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-title">Admin <span>Dashboard</span></div>
+    <div class="topbar-right">
+      <span class="topbar-date" id="dateDisplay"></span>
+      <button class="notif-btn">🔔<span class="notif-dot" id="notifDot" style="display:none"></span></button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- STAT CARDS -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div>
+          <div class="stat-label">Total Bookings</div>
+          <div class="stat-value" id="totalBookings">—</div>
+          <div class="stat-sub">All time</div>
+        </div>
+        <div class="stat-icon icon-blue">📋</div>
+      </div>
+      <div class="stat-card">
+        <div>
+          <div class="stat-label">Pending</div>
+          <div class="stat-value" id="pendingCount" style="color:var(--yellow)">—</div>
+          <div class="stat-sub" style="color:var(--yellow)">Needs review</div>
+        </div>
+        <div class="stat-icon icon-gold">⏳</div>
+      </div>
+      <div class="stat-card">
+        <div>
+          <div class="stat-label">Accepted</div>
+          <div class="stat-value" id="acceptedCount" style="color:var(--green)">—</div>
+          <div class="stat-sub">Confirmed</div>
+        </div>
+        <div class="stat-icon icon-green">✅</div>
+      </div>
+      <div class="stat-card">
+        <div>
+          <div class="stat-label">Registered Users</div>
+          <div class="stat-value" id="totalUsers">—</div>
+          <div class="stat-sub">Total accounts</div>
+        </div>
+        <div class="stat-icon icon-blue">👥</div>
+      </div>
+    </div>
+
+    <!-- MAIN GRID: Table + Side panels -->
+    <div class="dashboard-grid">
+
+      <!-- BOOKINGS TABLE -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📋 Booking Requests</div>
+          <div class="filter-tabs">
+            <button class="tab active" onclick="filterBookings('all', this)">All</button>
+            <button class="tab" onclick="filterBookings('pending', this)">Pending</button>
+            <button class="tab" onclick="filterBookings('accepted', this)">Accepted</button>
+            <button class="tab" onclick="filterBookings('denied', this)">Denied</button>
+          </div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Customer</th>
+              <th>Service</th>
+              <th>Sub Service</th>
+              <th>Booking Date</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="bookingsBody">
+            <tr>
+              <td colspan="6" class="loading-cell">Loading bookings...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- RIGHT SIDE COLUMN -->
+      <div class="side-col">
+
+        <!-- SERVICE BREAKDOWN -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">🍽 Service Breakdown</div>
+          </div>
+          <div style="padding:16px 0 6px">
+            <div class="service-bar-item">
+              <div class="sb-header">
+                <span class="sb-label">🍳 Cooking</span>
+                <span class="sb-pct" id="pct-cooking">0%</span>
+              </div>
+              <div class="sb-track">
+                <div class="sb-fill" id="bar-cooking" style="width:0%; background:var(--gold)"></div>
+              </div>
+            </div>
+            <div class="service-bar-item">
+              <div class="sb-header">
+                <span class="sb-label">🧹 Cleaning</span>
+                <span class="sb-pct" id="pct-cleaning">0%</span>
+              </div>
+              <div class="sb-track">
+                <div class="sb-fill" id="bar-cleaning" style="width:0%; background:#60a5fa"></div>
+              </div>
+            </div>
+            <div class="service-bar-item">
+              <div class="sb-header">
+                <span class="sb-label">🎉 Events</span>
+                <span class="sb-pct" id="pct-events">0%</span>
+              </div>
+              <div class="sb-track">
+                <div class="sb-fill" id="bar-events" style="width:0%; background:#c084fc"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECENT USERS -->
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">👥 Recent Users</div>
+          </div>
+          <div id="usersList">
+            <div class="loading-cell">Loading users...</div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- end dash
+    

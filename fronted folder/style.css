@@ -1,0 +1,629 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* PAGE BACKGROUND */
+body {
+  background-color: #424769;
+}
+
+/* ================= NAVBAR ================= */
+
+header {
+  padding: 10px 0;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  padding: 0 20px;
+  background-color: #272b45;
+}
+
+/* LOGO */
+.nav-logo {
+  width: 120px;
+  height: 60px;
+}
+
+.logo {
+  background-image: url("prologo.png");
+  height: 55px;
+  width: 80px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* MENU */
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  margin-left: 30px;
+}
+
+.nav-menu li {
+  position: relative;
+}
+
+.nav-menu a {
+  color: #e6e6e6;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 8px 10px;
+  transition: 0.3s;
+  position: relative;
+}
+
+.nav-menu a:hover {
+  color: orange;
+}
+
+/* NAV HOVER UNDERLINE */
+.nav-menu a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -3px;
+  background-color: #ffcc00;
+  transition: 0.3s ease;
+}
+
+.nav-menu a:hover::after {
+  width: 100%;
+}
+
+.nav-menu a.active {
+  color: #ffcc00;
+  font-weight: bold;
+}
+
+.nav-menu a.active::after {
+  width: 100%;
+}
+
+/* DROPDOWN */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #f4f4f4;
+  list-style: none;
+  display: none;
+  min-width: 180px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 8px 12px;
+  color: #333;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* LOGIN / SIGNUP NAV BUTTONS */
+.nav-auth {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.nav-auth button,
+.nav-auth a {
+  padding: 6px 14px;
+  cursor: pointer;
+  font-weight: bold;
+  border: none;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.login {
+  background-color: #ffffff;
+  color: #2d3250;
+}
+
+.login:hover {
+  background-color: #ddd;
+}
+
+.signup {
+  background-color: #ffcc00;
+  color: #2d3250;
+}
+
+.signup:hover {
+  background-color: orange;
+}
+
+/* ================= AUTH PAGES (Login & Signup) ================= */
+
+/* Only apply center styling when body has auth-page class */
+body.auth-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Center container but keep navbar safe */
+body.auth-page .auth-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Box styling */
+.auth-box {
+  background-color: #ffffff;
+  width: 350px;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+/* Heading */
+.auth-box h2 {
+  margin-bottom: 20px;
+  color: #2d3250;
+}
+
+/* Inputs */
+.auth-box input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.auth-box input:focus {
+  border-color: #2d3250;
+}
+
+/* Button */
+.auth-box button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 6px;
+  background-color: #2d3250;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.auth-box button:hover {
+  background-color: #1b1f35;
+}
+
+/* Text below */
+.auth-box p {
+  margin-top: 15px;
+}
+
+.auth-box a {
+  color: purple;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.auth-box a:hover {
+  text-decoration: underline;
+}
+
+/* ================= HOME PAGE ================= */
+
+.Service-Section {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.hero-section {
+  width: 100%;
+  height: 125vh;
+  margin-top: 12px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-section img {
+  width: 1150px;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.main {
+  padding-top: 10px;
+}
+
+.box {
+  border: 2px solid black;
+  height: 300px;
+  width: 30%;
+  background-color: white;
+  transition: 0.3s;
+}
+
+.box:hover {
+  transform: translateY(-5px);
+}
+
+.box_img {
+  height: 215px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.box_content {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+/* ============================= */
+/* COOKING PAGE STYLES */
+/* ============================= */
+
+.cooking-page {
+    background-color: #eef4ff;
+}
+
+.cooking-page section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+/* Hero Section */
+.cooking-page .cook-hero {
+    background: linear-gradient(to right, #4a90e2, #1f3c88);
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.cooking-page .cook-hero img {
+    width: 100%;
+    height: 400px;
+    /*object-fit: cover;*/
+    object-fit: inherit;
+    background-color: #ccc;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+/* Button */
+.cooking-page .cook-btn {
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: white;
+    color: #1f3c88;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.cooking-page .cook-btn:hover {
+    background-color: #1f3c88;
+    color: white;
+}
+
+/* Services List */
+.cooking-page .service-list {
+    list-style: none;
+    padding: 0;
+}
+
+/* Gallery */
+.cooking-page .cooking-gallery-box {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Pricing */
+.cooking-page .cook-price-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.cooking-page .cook-price-card {
+    background: white;
+    padding: 30px;
+    width: 220px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+/* ===== Cooking Gallery Caption + Hover ===== */
+
+.cooking-page .service-item {
+    position: relative;
+    width: 250px;  /* same size as your old .box */
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.cooking-page .service-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: 0.4s ease;
+}
+
+/* Caption */
+.cooking-page .service-caption {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 15px;
+    transform: translateY(100%);
+    transition: 0.4s ease;
+}
+
+/* Slide Up */
+.cooking-page .service-item:hover .service-caption {
+    transform: translateY(0);
+}
+
+/* Image Zoom */
+.cooking-page .service-item:hover img {
+    transform: scale(1.05);
+}
+/* ============================= */
+/* CLEANING PAGE STYLES */
+/* ============================= */
+
+.cleaning-page {
+    background-color: #eef4ff;
+}
+
+.cleaning-page section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.cleaning-page .clean-hero {
+    background: linear-gradient(to right, #4a90e2, #1f3c88);
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.cleaning-page .clean-hero img {
+    width: 100%;
+    height: 400px;
+    object-fit: inherit;
+    background-color: #ccc;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.cleaning-page .clean-btn {
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: white;
+    color: #1f3c88;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.cleaning-page .clean-btn:hover {
+    background-color: #1f3c88;
+    color: white;
+}
+
+.cleaning-page .cleaning-gallery-box {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.cleaning-page .clean-gallery-box img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.cleaning-page .clean-price-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.cleaning-page .clean-price-card {
+    background: white;
+    padding: 30px;
+    width: 220px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+/* Cleaning Gallery Hover Effect */
+
+.cleaning-page .service-item {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.cleaning-page .service-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: 0.4s ease;
+}
+
+.cleaning-page .service-caption {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    transform: translateY(100%);
+    transition: 0.4s ease;
+}
+
+.cleaning-page .service-item:hover .service-caption {
+    transform: translateY(0);
+}
+
+.cleaning-page .service-item:hover img {
+    transform: scale(1.05);
+}
+/* ============================= */
+/* EVENT PAGE STYLES */
+/* ============================= */
+
+.event-page {
+    background-color: #eef4ff;
+}
+
+.event-page section {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.event-page .event-hero {
+    background: linear-gradient(to right, #4a90e2, #1f3c88);
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.event-page .event-hero img {
+    width: 100%;
+    height: 450px;
+    object-fit: inherit;
+    background-color: #ccc;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.event-page .event-btn {
+    display: inline-block;
+    padding: 10px 25px;
+    background-color: white;
+    color: #1f3c88;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.event-page .event-btn:hover {
+    background-color: #1f3c88;
+    color: white;
+}
+
+.event-page .event-gallery-box {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.event-page .event-gallery-box img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.event-page .event-price-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.event-page .event-price-card {
+    background: white;
+    padding: 30px;
+    width: 220px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+/* Gallery Image Wrapper */
+.event-page .event-item {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Make image fit perfectly */
+.event-page .event-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Caption styling */
+.event-page .event-caption {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    transform: translateY(100%);
+    transition: 0.4s;
+}
+.event-page .event-item:hover .event-caption {
+    transform: translateY(0);
+}
+.event-page .event-item:hover img {
+    transform: scale(1.05);
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Household Services</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <!-- Navbar starts here -->
+    <nav class="navbar">
+      <!-- Logo -->
+      <div class="nav-logo">
+        <div class="logo"></div>
+      </div>
+
+      <!-- Menu -->
+      <ul class="nav-menu">
+        <li><a href="user_home.html">Home</a></li>
+
+        <li class="dropdown">
+          <a href="#">Services</a>
+          <ul class="dropdown-menu">
+            <li><a href="cooking.html">Cooking Services</a></li>
+            <li><a href="cleaning.html">Cleaning Services</a></li>
+            <li><a href="event_management.html">Event Management</a></li>
+          </ul>
+        </li>
+
+        <li><a href="booking.html">Book Service</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+
+      <!-- Login out-->
+      <div class="nav-auth">
+        <button onclick="location.href='index.html'">Log Out</button>
+      </div>
+    </nav>
+    <!-- Navbar ends here -->
+  </header>
+
+  <!-- Main content -->
+  <main>
+    <section class="hero-section">
+      <img src="hero_image.png" alt="Hero Image">
+    </section>
+
+
+    <div class="Service-Section">
+      <div class="box1 box">
+        <h3>Cooking</h3>
+        <div class="box_img" style="background-image: url('cooking photo.jpg');"></div>
+        <a href="cooking.html">See more</a>
+      </div>
+      <div class="box2 box">
+        <h3>Cleaning</h3>
+        <div class="box_img" style="background-image: url('cleaning photo.jpg');"></div>
+        <a href="cleaning.html">See more</a>
+      </div>
+      <div class="box3 box">
+        <h3>Small Event Management</h3>
+        <div class="box_img" style="background-image: url('small event management photo.jpg');"></div>
+        <a href="event_management.html">See more</a>
+      </div>
+    </div>
+    <!-- Your page content goes here -->
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <!-- Footer content -->
+  </footer>
+  
+  <script src="scripts.js"></script>
+
+</body>
+</html>

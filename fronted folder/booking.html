@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Service</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Link Separate CSS -->
+  <link rel="stylesheet" href="booking.css">
+</head>
+<body>
+
+<div class="booking-page">
+  <div class="booking-container">
+    <h2>Book Our Service</h2>
+
+    <form id="bookingForm">
+
+      <div class="booking-form-group">
+        <label>Name</label>
+        <input type="text" id="name" required>
+      </div>
+
+      <div class="booking-form-group">
+        <label>Email</label>
+        <input type="email" id="email" required>
+      </div>
+
+      <div class="booking-form-group">
+        <label>Phone</label>
+        <input type="tel" id="phone" required>
+      </div>
+
+      <div class="booking-form-group">
+        <label>Select Service</label>
+        <select id="service" required>
+          <option value="">-- Choose Service --</option>
+          <option value="Cooking">Cooking</option>
+          <option value="Cleaning">Cleaning</option>
+          <option value="Event">Event Management</option>
+        </select>
+      </div>
+
+      <div class="booking-form-group" id="subServiceGroup" style="display:none;">
+        <label id="subServiceLabel"></label>
+        <select id="subService"></select>
+      </div>
+
+      <div class="booking-form-group">
+        <label>Booking Date</label>
+        <input type="date" id="date" required>
+      </div>
+
+      <div class="booking-form-group">
+        <label>Message</label>
+        <textarea id="message"></textarea>
+      </div>
+
+      <button type="submit" class="booking-btn">Book Now</button>
+
+      <div class="booking-success" id="successMsg">
+        Booking Submitted Successfully!
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<script src="booking.js"></script>
+
+</body>
+</html>
