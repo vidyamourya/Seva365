@@ -1,3 +1,4 @@
+//login.js
 document.addEventListener("DOMContentLoaded", function () {
 
   document.getElementById("loginForm").addEventListener("submit", function (event) {
@@ -36,9 +37,9 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("Login Successful!");
 
         if (data.role === "admin") {
-            window.location.href = "admin/admin.html";
+            window.location.href = "admin/admin";
         } else {
-            window.location.href = "user_home.html";
+            window.location.href = "user_home";
         }
       }else {
        alert(data.message || "Login failed");

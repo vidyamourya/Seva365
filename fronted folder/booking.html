@@ -2,70 +2,155 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Book Service</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Service - Seva365</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Link Separate CSS -->
-  <link rel="stylesheet" href="booking.css">
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .booking-hero {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                  url('hero_image.png') center/cover no-repeat;
+      min-height: 35vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+    }
+
+    .booking-card {
+      border-radius: 10px;
+    }
+
+    .booking-success {
+      display: none;
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #d4edda;
+      color: #155724;
+      border-radius: 5px;
+      text-align: center;
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="booking-page">
-  <div class="booking-container">
-    <h2>Book Our Service</h2>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="user_home.html">Seva365</a>
 
-    <form id="bookingForm">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="booking-form-group">
-        <label>Name</label>
-        <input type="text" id="name" required>
-      </div>
-
-      <div class="booking-form-group">
-        <label>Email</label>
-        <input type="email" id="email" required>
-      </div>
-
-      <div class="booking-form-group">
-        <label>Phone</label>
-        <input type="tel" id="phone" required>
-      </div>
-
-      <div class="booking-form-group">
-        <label>Select Service</label>
-        <select id="service" required>
-          <option value="">-- Choose Service --</option>
-          <option value="Cooking">Cooking</option>
-          <option value="Cleaning">Cleaning</option>
-          <option value="Event">Event Management</option>
-        </select>
-      </div>
-
-      <div class="booking-form-group" id="subServiceGroup" style="display:none;">
-        <label id="subServiceLabel"></label>
-        <select id="subService"></select>
-      </div>
-
-      <div class="booking-form-group">
-        <label>Booking Date</label>
-        <input type="date" id="date" required>
-      </div>
-
-      <div class="booking-form-group">
-        <label>Message</label>
-        <textarea id="message"></textarea>
-      </div>
-
-      <button type="submit" class="booking-btn">Book Now</button>
-
-      <div class="booking-success" id="successMsg">
-        Booking Submitted Successfully!
-      </div>
-
-    </form>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto text-center text-lg-start">
+        <li class="nav-item"><a class="nav-link" href="user_home.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="booking.html">Book Service</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item ms-lg-3">
+          <a class="btn btn-outline-light w-100 w-lg-auto mt-2 mt-lg-0" href="index.html">Log Out</a>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
+</nav>
 
+<!-- Hero -->
+<section class="booking-hero">
+  <div>
+    <h1 class="fw-bold">Book Our Service</h1>
+    <p class="lead">Schedule trusted professionals easily</p>
+  </div>
+</section>
+
+<!-- Booking Form -->
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10">
+
+        <div class="card shadow booking-card p-4">
+
+          <form id="bookingForm">
+
+            <div class="row g-3">
+
+              <div class="col-md-6">
+                <label class="form-label">Name</label>
+                <input type="text" id="name" class="form-control" required>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input type="email" id="email" class="form-control" required>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Phone</label>
+                <input type="tel" id="phone" class="form-control" required>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Select Service</label>
+                <select id="service" class="form-select" required>
+                  <option value="">-- Choose Service --</option>
+                  <option value="Cooking">Cooking</option>
+                  <option value="Cleaning">Cleaning</option>
+                  <option value="Event">Event Management</option>
+                </select>
+              </div>
+
+              <!-- Sub Service -->
+              <div class="col-md-6" id="subServiceGroup" style="display:none;">
+                <label id="subServiceLabel" class="form-label"></label>
+                <select id="subService" class="form-select"></select>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Booking Date</label>
+                <input type="date" id="date" class="form-control" required>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label">Message</label>
+                <textarea id="message" class="form-control" rows="4"></textarea>
+              </div>
+
+              <div class="col-12">
+                <button type="submit" class="btn btn-warning w-100">Book Now</button>
+              </div>
+
+              <div class="col-12">
+                <div class="booking-success" id="successMsg">
+                  Booking Submitted Successfully!
+                </div>
+              </div>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-dark text-light text-center py-3">
+  <p class="mb-0">© 2026 Seva365 | All Rights Reserved</p>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Your Existing JS (NOT changed) -->
 <script src="booking.js"></script>
 
 </body>

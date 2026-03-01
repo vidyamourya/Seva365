@@ -1,14 +1,76 @@
 const express = require("express");
+const session = require("express-session"); //for handling user session.
 const mysql = require("mysql");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
-
+const path = require("path");
+const frontendPath = path.join(__dirname, "../fronted folder");
 const app = express();
 
 // Middleware
 app.use(cors());
-app.use(express.json());
-app.use(express.static("../fronted folder"));
+app.use(express.json()); // VERY IMPORTANT for fetch JSON
+app.use(express.urlencoded({ extended: true }));
+app.use(session({
+  secret: "vidya",
+  resave: false,
+  saveUninitialized: false
+}));
+//middleware function used for page restrication 
+function isAuthenticated(req, res, next) {
+  if (req.session.user) {
+    next();
+  } else {
+    res.redirect("/");
+  }
+}
+//route
+app.use((req, res, next) => {
+  if (req.path.endsWith(".html")) {
+    return res.redirect("/");
+  }
+  next();
+});
+app.get("/", (req, res) => {
+
+  if (req.session.user) {
+
+    if (req.session.user.role === "admin") {
+      return res.redirect("/admin/admin.html");
+    } else {
+      return res.redirect("/user_home");
+    }
+  }
+
+  // Not logged in → show index.html
+  res.sendFile(path.join(frontendPath, "index.html"));
+});
+app.get("/user_home", isAuthenticated, (req, res) => {
+  res.sendFile(path.join(frontendPath, "user_home.html"));
+});
+app.get("/contact", isAuthenticated, (req, res) => {
+  res.sendFile(path.join(frontendPath, "contact.html"));
+});
+app.get("/SignUp", (req, res) => {
+  res.sendFile(path.join(frontendPath, "SignUp.html"));
+});
+app.get('/booking',isAuthenticated, (req, res)=>{
+  res.sendFile(path.join(frontendPath, 'booking.html'));
+});
+app.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).send("Could not log out");
+    }
+    res.redirect("/");
+  });
+});
+
+//allow only css and js file direct access
+app.use("/css", express.static(path.join(frontendPath, "css")));
+app.use("/js", express.static(path.join(frontendPath, "js")));
+app.use("/images", express.static(path.join(frontendPath, "images")));
+// app.use(express.static("../fronted folder"));
 
 // MySQL Connection
 const db = mysql.createConnection({
@@ -79,24 +141,53 @@ app.post("/signup", async (req, res) => {
 // =======================
 // LOGIN ROUTE
 // =======================
-app.post("/login", (req, res) => {
+app.post("/login", async (req, res) => {
+
+  // console.log("BODY:", req.body);
+
   const { email, password } = req.body;
+
+  if (!email || !password) {
+    console.log("Missing fields");
+    return res.status(400).json({ message: "All fields required" });
+  }
+
   const sql = "SELECT * FROM users WHERE email = ?";
 
   db.query(sql, [email], async (err, result) => {
-    if (err) return res.status(500).json({ message: "Server error" });
-    if (result.length === 0) return res.status(400).json({ message: "User not found" });
+
+    console.log("DB RESULT:", result);
+
+    if (err) {
+      console.log("DB ERROR:", err);
+      return res.status(500).json({ message: "Server error" });
+    }
+
+    if (result.length === 0) {
+      console.log("User not found in DB");
+      return res.status(400).json({ message: "User not found" });
+    }
 
     const user = result[0];
+
     const isMatch = await bcrypt.compare(password, user.password);
 
-    if (!isMatch) return res.status(400).json({ message: "Invalid password" });
+    console.log("Password Match:", isMatch);
 
-    res.json({
-      message: "Login successful",
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid password" });
+    }
+
+    req.session.user = {
+      id: user.id,
+      email: user.email,
       role: user.role
-    });
+    };
+
+    res.json({ message: "Login successful", role: user.role });
+
   });
+
 });
 
 // =======================

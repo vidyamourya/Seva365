@@ -2,80 +2,163 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Household Services</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Seva365 - Household Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    /* Hero Section */
+    .hero-section {
+      background: url('images/hero_image.png') center/cover no-repeat;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+    }
+
+    .hero-content {
+      position: relative;
+      color: white;
+      z-index: 2;
+      max-width: 700px;
+    }
+
+    .service-card img {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      transition: 0.3s;
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- Header Section -->
-  <header>
-    <!-- Navbar starts here -->
-    <nav class="navbar">
-      <!-- Logo -->
-      <div class="nav-logo">
-        <div class="logo"></div>
-      </div>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">Seva365</a>
 
-      <!-- Menu -->
-      <ul class="nav-menu">
-        <li><a href="user_home.html">Home</a></li>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <li class="dropdown">
-          <a href="#">Services</a>
-          <ul class="dropdown-menu">
-            <li><a href="cooking.html">Cooking Services</a></li>
-            <li><a href="cleaning.html">Cleaning Services</a></li>
-            <li><a href="event_management.html">Event Management</a></li>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto text-center text-lg-start">
+
+        <li class="nav-item">
+          <a class="nav-link active" href="user_home">Home</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+            Services
+          </a>
+          <ul class="dropdown-menu text-center text-lg-start">
+            <li><a class="dropdown-item" href="cooking">Cooking</a></li>
+            <li><a class="dropdown-item" href="cleaning">Cleaning</a></li>
+            <li><a class="dropdown-item" href="event_management">Event Management</a></li>
           </ul>
         </li>
 
-        <li><a href="booking.html">Book Service</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="booking">Book Service</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="about">About</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="contact">Contact</a>
+        </li>
+
+        <li class="nav-item mt-2 mt-lg-0 ms-lg-3">
+          <a class="btn btn-outline-light w-100 w-lg-auto" href="/logout">Log Out</a>
+        </li>
       </ul>
-
-      <!-- Login out-->
-      <div class="nav-auth">
-        <button onclick="location.href='index.html'">Log Out</button>
-      </div>
-    </nav>
-    <!-- Navbar ends here -->
-  </header>
-
-  <!-- Main content -->
-  <main>
-    <section class="hero-section">
-      <img src="hero_image.png" alt="Hero Image">
-    </section>
-
-
-    <div class="Service-Section">
-      <div class="box1 box">
-        <h3>Cooking</h3>
-        <div class="box_img" style="background-image: url('cooking photo.jpg');"></div>
-        <a href="cooking.html">See more</a>
-      </div>
-      <div class="box2 box">
-        <h3>Cleaning</h3>
-        <div class="box_img" style="background-image: url('cleaning photo.jpg');"></div>
-        <a href="cleaning.html">See more</a>
-      </div>
-      <div class="box3 box">
-        <h3>Small Event Management</h3>
-        <div class="box_img" style="background-image: url('small event management photo.jpg');"></div>
-        <a href="event_management.html">See more</a>
-      </div>
     </div>
-    <!-- Your page content goes here -->
-  </main>
+  </div>
+</nav>
 
-  <!-- Footer -->
-  <footer>
-    <!-- Footer content -->
-  </footer>
-  
-  <script src="scripts.js"></script>
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="fw-bold display-5 display-md-4">Reliable Household Services</h1>
+    <p class="lead">Trusted professionals at your doorstep</p>
+    <a href="booking" class="btn btn-warning btn-lg mt-3 px-4">Book Now</a>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-4">Our Services</h2>
+
+    <div class="row g-4">
+
+      <!-- Cooking -->
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="card service-card shadow h-100">
+          <img src="images/cooking photo.jpg" class="card-img-top" alt="Cooking">
+          <div class="card-body text-center">
+            <h5 class="card-title">Cooking Services</h5>
+            <p class="card-text">Experienced cooks for daily meals & special occasions.</p>
+            <a href="cooking" class="btn btn-primary">See More</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cleaning -->
+      <div class="col-12 col-sm-6 col-lg-4">
+        <div class="card service-card shadow h-100">
+          <img src="images/cleaning photo.jpg" class="card-img-top" alt="Cleaning">
+          <div class="card-body text-center">
+            <h5 class="card-title">Cleaning Services</h5>
+            <p class="card-text">Professional home and office cleaning services.</p>
+            <a href="cleaning" class="btn btn-primary">See More</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Event Management -->
+      <div class="col-12 col-sm-6 col-lg-4 mx-sm-auto">
+        <div class="card service-card shadow h-100">
+          <img src="images/small event management photo.jpg" class="card-img-top" alt="Event">
+          <div class="card-body text-center">
+            <h5 class="card-title">Small Event Management</h5>
+            <p class="card-text">Birthday parties, gatherings & small celebrations.</p>
+            <a href="event_management" class="btn btn-primary">See More</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-dark text-light text-center py-3 mt-5">
+  <p class="mb-0">© 2026 Seva365 | All Rights Reserved</p>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
