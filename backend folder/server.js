@@ -67,8 +67,17 @@ app.get('/cleaning',isAuthenticated, (req, res)=>{
 app.get('/event_management',isAuthenticated, (req, res)=>{
   res.sendFile(path.join(frontendPath, 'event_management.html'));
 });
+app.get('/about',isAuthenticated, (req, res)=>{
+  res.sendFile(path.join(frontendPath, 'about.html'));
+});
 app.get('/admin',isAuthenticated, (req, res)=>{
   res.sendFile(path.join(frontendPath, "admin/admin.html"));
+});
+app.get('/admin_user_page',isAuthenticated, (req, res)=>{
+  res.sendFile(path.join(frontendPath, "admin/admin_user_page.html"));
+});
+app.get('/admin_booking_page',isAuthenticated, (req, res)=>{
+  res.sendFile(path.join(frontendPath, "admin/admin_booking_page.html"));
 });
 
 app.get("/logout", (req, res) => {
@@ -201,6 +210,54 @@ app.post("/login", async (req, res) => {
     res.json({ message: "Login successful", role: user.role });
 
   });
+
+});
+// contact route //
+app.post("/contact", (req, res) => {
+
+    const { name, email, message } = req.body;
+
+    const sql = "INSERT INTO contact_messages (name, email, message) VALUES (?, ?, ?)";
+
+    db.query(sql, [name, email, message], (err, result) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ message: "Database error" });
+        }
+
+        res.json({ message: "Message sent successfully!" });
+    });
+});
+app.get("/all-bookings", (req, res) => {
+
+    const sql = "SELECT * FROM bookings ORDER BY id DESC";
+
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ message: "Database error" });
+        }
+
+        res.json(results);
+    });
+
+});
+app.get("/admin-users", (req, res) => {
+
+    const sql = `
+        SELECT id, name, email, role
+        FROM users
+        ORDER BY id DESC
+    `;
+
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ message: "Database error" });
+        }
+
+        res.json(results);
+    });
 
 });
 
