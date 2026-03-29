@@ -1,95 +1,357 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Cooking Service</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cooking Service - Seva365</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* ── Hero ── */
+        .hero-section {
+            background: url('images/safe cooking.jpg') center/cover no-repeat;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content {
+            position: relative;
+            color: white;
+            z-index: 2;
+            max-width: 700px;
+        }
+
+        /* ── Service Cards (matches home page) ── */
+        .service-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            transition: 0.3s;
+        }
+
+        /* ── Gallery ── */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            height: 220px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.07);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: #fff;
+            padding: 28px 16px 14px;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        /* ── Service List ── */
+        .service-list-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            background: #fff;
+            border-radius: 6px;
+            border-left: 3px solid #ffc107;
+            font-size: 15px;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+
+        .service-list-item:hover {
+            background: #fff9e6;
+            transform: translateX(4px);
+        }
+
+        .service-list-item::before {
+            content: '✓';
+            color: #ffc107;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        /* ── Pricing Cards ── */
+        .price-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 40px 28px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: #fff;
+            height: 100%;
+        }
+
+        .price-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .price-card.featured {
+            border-color: #ffc107;
+            background: #343a40;
+            color: #fff;
+        }
+
+        .price-card .price-amount {
+            font-size: 44px;
+            font-weight: 700;
+            color: #343a40;
+            line-height: 1;
+        }
+
+        .price-card.featured .price-amount {
+            color: #ffc107;
+        }
+
+        .price-card .plan-name {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #6c757d;
+            margin-bottom: 12px;
+        }
+
+        .price-card.featured .plan-name {
+            color: #adb5bd;
+        }
+    </style>
 </head>
-<body class="cooking-page">
+<body>
 
-    <!-- Hero Section -->
-    <section class="cook-hero">
-        <div class="cook-hero-content">
-            <h1>Professional Cooking Services</h1>
-            <p>Fresh • Hygienic • Delicious</p>
+<!-- Navbar (exact match to home page) -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">Seva365</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto text-center text-lg-start">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="user_home">Home</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">
+                        Services
+                    </a>
+                    <ul class="dropdown-menu text-center text-lg-start">
+                        <li><a class="dropdown-item active" href="cooking">Cooking</a></li>
+                        <li><a class="dropdown-item" href="cleaning">Cleaning</a></li>
+                        <li><a class="dropdown-item" href="event_management">Event Management</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="booking">Book Service</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="about">About</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="contact">Contact</a>
+                </li>
+
+                <li class="nav-item mt-2 mt-lg-0 ms-lg-3">
+                    <a class="btn btn-outline-light w-100 w-lg-auto" href="/logout">Log Out</a>
+                </li>
+
+            </ul>
         </div>
+    </div>
+</nav>
 
-        <img src="images/safe cooking.jpg" alt="Cooking Service">
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1 class="fw-bold display-5">Professional Cooking Services</h1>
+        <p class="lead">Fresh &bull; Hygienic &bull; Delicious</p>
+        <a href="booking.html" class="btn btn-warning btn-lg mt-3 px-4">Book Now</a>
+    </div>
+</section>
 
-        <a href="booking.html" class="cook-btn">Book Now</a>
-    </section>
-
-    <!-- About Section -->
-    <section class="cook-about">
-        <h2>About Our Cooking Service</h2>
-        <p>
-            We provide professional home cooking and catering services 
-            for families and special occasions with fresh ingredients.
-        </p>
-    </section>
-
-    <!-- Services List -->
-    <section class="cook-services">
-        <h2>What We Provide</h2>
-        <ul class="service-list">
-            <li>Daily Home Meal Preparation</li>
-            <li>Party Catering</li>
-            <li>Vegetarian & Non-Vegetarian Dishes</li>
-            <li>Customized Menu</li>
-            <li>Bulk Food Orders</li>
-        </ul>
-    </section>
-
-    <!-- Gallery -->
-    <section class="cook-gallery">
-        <h2>Types of Dishes</h2>
-        <div class="cooking-gallery-box">
-
-          <div class="service-item">
-           <img src="images/indian food.jpg">
-           <div class="service-caption">Indian food</div>
-          </div>
-
-          <div class="service-item">
-           <img src="images/italian food.jpg">
-           <div class="service-caption">Italian food</div>
-          </div>
-
-          <div class="service-item">
-           <img src="images/continental food.jpg">
-           <div class="service-caption">Continental food</div>
-          </div>
-
-        </div>
-    </section>
-
-    <!-- Pricing -->
-    <section class="cook-pricing">
-        <h2>Our Packages</h2>
-        <div class="cook-price-container">
-            <div class="cook-price-card">
-                <h3>Basic</h3>
-                <p>₹1000</p>
-            </div>
-
-            <div class="cook-price-card">
-                <h3>Standard</h3>
-                <p>₹3000</p>
-            </div>
-
-            <div class="cook-price-card">
-                <h3>Premium</h3>
-                <p>₹5000</p>
+<!-- About Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-7">
+                <h2 class="fw-bold mb-3">About Our Cooking Service</h2>
+                <p class="text-muted fs-5">
+                    We provide professional home cooking and catering services
+                    for families and special occasions with fresh ingredients.
+                </p>
             </div>
         </div>
-    </section>
 
-    <!-- Contact -->
-    <section class="cook-contact">
-        <h2>Contact Us</h2>
-        <p>+91 9876543210</p>
-        <p>cooking@email.com</p>
-        <a href="user_home.html" class="cook-btn">Back to Home</a>
-    </section>
+        <div class="row g-4 mt-2 text-center">
+            <div class="col-4">
+                <div class="py-3 border-end">
+                    <div class="fs-2 fw-bold text-warning">500+</div>
+                    <div class="text-muted small">Happy Families</div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="py-3 border-end">
+                    <div class="fs-2 fw-bold text-warning">1+</div>
+                    <div class="text-muted small">Years Experience</div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="py-3">
+                    <div class="fs-2 fw-bold text-warning">3</div>
+                    <div class="text-muted small">Cuisine Styles</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services List -->
+<section class="py-5" style="background:#f8f9fa;">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-4">What We Provide</h2>
+        <div class="row g-3 justify-content-center">
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="service-list-item">Daily Home Meal Preparation</div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="service-list-item">Party Catering</div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="service-list-item">Vegetarian &amp; Non-Vegetarian Dishes</div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="service-list-item">Customized Menu</div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="service-list-item">Bulk Food Orders</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-4">Types of Dishes</h2>
+        <div class="row g-4">
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="gallery-item shadow-sm">
+                    <img src="images/indian food.jpg" alt="Indian Food">
+                    <div class="gallery-caption">Indian Cuisine</div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="gallery-item shadow-sm">
+                    <img src="images/italian food.jpg" alt="Italian Food">
+                    <div class="gallery-caption">Italian Cuisine</div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 mx-sm-auto">
+                <div class="gallery-item shadow-sm">
+                    <img src="images/continental food.jpg" alt="Continental Food">
+                    <div class="gallery-caption">Continental</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing -->
+<section class="py-5" style="background:#f8f9fa;">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-5">Our Packages</h2>
+        <div class="row g-4 justify-content-center">
+
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="price-card shadow-sm">
+                    <div class="plan-name">Basic</div>
+                    <div class="price-amount">₹1000</div>
+                    <p class="text-muted mt-3 mb-4 small">Ideal for small families.<br>Up to 2 dishes included.</p>
+                    <a href="booking.html" class="btn btn-outline-warning w-100">Book Now</a>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="price-card featured shadow position-relative">
+                    <span class="badge bg-warning text-dark position-absolute top-0 start-50 translate-middle px-3">Popular</span>
+                    <div class="plan-name">Standard</div>
+                    <div class="price-amount">₹3000</div>
+                    <p class="text-secondary mt-3 mb-4 small">Great for gatherings.<br>Up to 5 dishes included.</p>
+                    <a href="booking.html" class="btn btn-warning w-100">Book Now</a>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="price-card shadow-sm">
+                    <div class="plan-name">Premium</div>
+                    <div class="price-amount">₹5000</div>
+                    <p class="text-muted mt-3 mb-4 small">Full catering experience.<br>Unlimited dishes.</p>
+                    <a href="booking.html" class="btn btn-outline-warning w-100">Book Now</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section class="py-5">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-4">Contact Us</h2>
+        <p class="fs-5 mb-1"><strong>📞</strong> +91 9876543210</p>
+        <p class="fs-5 mb-4"><strong>✉️</strong> cooking@email.com</p>
+        <a href="user_home.html" class="btn btn-dark px-4">← Back to Home</a>
+    </div>
+</section>
+
+<!-- Footer (exact match to home page) -->
+<footer class="bg-dark text-light text-center py-3 mt-5">
+    <p class="mb-0">© 2026 Seva365 | All Rights Reserved</p>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Seva365 — Cleaning</title>
+  <link rel="stylesheet" href="/admin/AdminStyle.css"/>
+  <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th, td {
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
+      th {
+        background-color: #222;
+        color: white;
+      }
+    </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-badge">S365</div>
+    <div class="logo-text">Seva<span>365</span></div>
+  </div>
+
+  <div class="sidebar-label">Main</div>
+  <div class="nav-item active"><span class="nav-icon">📊</span> Dashboard</div>
+  <div class="nav-item" onclick="window.location.href='/admin_booking_page'">
+    <span class="nav-icon">📋</span> All Bookings 
+    <span class="nav-badge" id="pendingBadge">0</span>
+  </div>
+
+  <div class="nav-item" onclick="window.location.href='/admin_user_page'">
+  <span class="nav-icon">👥</span> Users
+  </div>
+  <div class="sidebar-label">Services</div>
+  <div class="nav-item" onclick="window.location.href='/admin_cooking'">
+   <span class="nav-icon">🍳</span> Cooking
+  </div>
+  <div class="nav-item" onclick="window.location.href='/admin_cleaning'">
+    <span class="nav-icon">🧹</span> Cleaning
+  </div>
+  <div class="nav-item" onclick="window.location.href='/admin_event_management'">
+    <span class="nav-icon">🎉</span> Events
+  </div>
+
+  <div class="sidebar-label">Account</div>
+  <div class="nav-item" onclick="window.location.href='index.html'"><span class="nav-icon">🚪</span> Back to Site</div>
+
+  <div class="sidebar-bottom">
+    <div class="admin-chip">
+      <div class="admin-avatar">A</div>
+      <div class="admin-info">
+        <p>Admin</p>
+        <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9ceff9eafdafaaa9dcfdf8f1f5f2b2f5f2">[email&#160;protected]</a></span>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- TOAST NOTIFICATIONS -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-title">Admin <span>Dashboard</span></div>
+    <div class="topbar-right">
+      <span class="topbar-date" id="dateDisplay"></span>
+      <button class="notif-btn" id="notifyBtn">🔔
+        <span class="notif-dot" id="notifDot" style="display:none"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="content">
+    <h2>Cleaning Bookings</h2>
+    <table>
+        <thead>
+            <tr>
+                 <th>ID</th>
+                 <th>Name</th>
+                 <th>Sub Service</th>
+                 <th>Date</th>
+            </tr>
+        </thead>
+        <tbody id="adminCleaningTable"></tbody>
+    </table>
+
+</div>
+<script src="..\js\scripts.js"></script>
+</body>
+</html>
+  

@@ -1,93 +1,349 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Event Management Service</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management Service - Seva365</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* ── Hero ── */
+        .hero-section {
+            background: url('images/event hero image.jpg') center/cover no-repeat;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content {
+            position: relative;
+            color: white;
+            z-index: 2;
+            max-width: 700px;
+        }
+
+        /* ── Gallery ── */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            height: 220px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.07);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: #fff;
+            padding: 28px 16px 14px;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        /* ── Service List ── */
+        .service-list-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            background: #fff;
+            border-radius: 6px;
+            border-left: 3px solid #ffc107;
+            font-size: 15px;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+
+        .service-list-item:hover {
+            background: #fff9e6;
+            transform: translateX(4px);
+        }
+
+        .service-list-item::before {
+            content: '✓';
+            color: #ffc107;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        /* ── Pricing Cards ── */
+        .price-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 40px 28px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: #fff;
+            height: 100%;
+        }
+
+        .price-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        }
+
+        .price-card.featured {
+            border-color: #ffc107;
+            background: #343a40;
+            color: #fff;
+        }
+
+        .price-card .price-amount {
+            font-size: 44px;
+            font-weight: 700;
+            color: #343a40;
+            line-height: 1;
+        }
+
+        .price-card.featured .price-amount {
+            color: #ffc107;
+        }
+
+        .price-card .plan-name {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #6c757d;
+            margin-bottom: 12px;
+        }
+
+        .price-card.featured .plan-name {
+            color: #adb5bd;
+        }
+    </style>
 </head>
-<body class="event-page">
+<body>
 
-    <!-- Hero Section -->
-    <section class="event-hero">
-        <h1>Professional Event Management</h1>
-        <p>Plan • Organize • Celebrate</p>
-        <img src="images/event hero image.jpg" alt="event Hero Image"><br>
-        <a href="booking.html" class="event-btn">Book Now</a>
-    </section>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">Seva365</a>
 
-    <!-- About Section -->
-    <section class="event-about">
-        <h2>About Our Event Services</h2>
-        <p>
-            We organize and manage weddings, birthday parties, 
-            corporate events, havans and special occasions with perfection.
-        </p>
-    </section>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <!-- Services List -->
-    <section class="event-services">
-        <h2>What We Provide</h2>
-        <ul>
-            <li> Wedding Planning</li>
-            <li> Birthday Party Management</li>
-            <li> Corporate Events</li>
-            <li> Decoration & Catering</li>
-            <li> Sound & Lighting Setup</li>
-            <li> traditional Poja & Havans Setup</li>
-        </ul>
-    </section>
-    <!-- Gallery -->
-    <section class="events">
-       <h2>Our Events</h2>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto text-center text-lg-start">
 
-         <div class="event-gallery-box">
+                <li class="nav-item">
+                    <a class="nav-link" href="user_home">Home</a>
+                </li>
 
-            <div class="event-item">
-              <img src="images/dinner img.jpg">
-              <div class="event-caption">Dinner Events</div>
-            </div>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">
+                        Services
+                    </a>
+                    <ul class="dropdown-menu text-center text-lg-start">
+                        <li><a class="dropdown-item" href="cooking">Cooking</a></li>
+                        <li><a class="dropdown-item" href="cleaning">Cleaning</a></li>
+                        <li><a class="dropdown-item active" href="event_management">Event Management</a></li>
+                    </ul>
+                </li>
 
-            <div class="event-item">
-               <img src="images/puja img.jpg">
-               <div class="event-caption">puja Decoration</div>
-            </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="booking">Book Service</a>
+                </li>
 
-            <div class="event-item">
-               <img src="images/surprise img.jpg">
-               <div class="event-caption">surprise event</div>
-            </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="about">About</a>
+                </li>
 
-         </div>
-    </section>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact">Contact</a>
+                </li>
 
-    <!-- Pricing -->
-    <section class="event-pricing">
-        <h2>Our Packages</h2>
-        <div class="event-price-container">
-            <div class="event-price-card">
-              <h3>Basic</h3>
-              <p>₹5000</p>
-            </div>
+                <li class="nav-item mt-2 mt-lg-0 ms-lg-3">
+                    <a class="btn btn-outline-light w-100 w-lg-auto" href="/logout">Log Out</a>
+                </li>
 
-            <div class="event-price-card">
-              <h3>Standard</h3>
-              <p>₹8000</p>
-            </div>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-            <div class="event-price-card">
-              <h3>Premium</h3>
-              <p>₹15000</p>
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1 class="fw-bold display-5">Professional Event Management</h1>
+        <p class="lead">Plan &bull; Organize &bull; Celebrate</p>
+        <a href="booking.html" class="btn btn-warning btn-lg mt-3 px-4">Book Now</a>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-7">
+                <h2 class="fw-bold mb-3">About Our Event Services</h2>
+                <p class="text-muted fs-5">
+                    We organize and manage weddings, birthday parties,
+                    corporate events, havans and special occasions with perfection.
+                </p>
             </div>
         </div>
-    </section>
 
-    <!-- Contact -->
-    <section class="event-contact">
-        <h2>Contact Us</h2>
-        <p>📞 +91 9876543210</p>
-        <p>📧 events@email.com</p>
-        <a href="user_home.html" class="event-btn">Back to Home</a>
-    </section>
+        <div class="row g-4 mt-2 text-center">
+            <div class="col-4">
+                <div class="py-3 border-end">
+                    <div class="fs-2 fw-bold text-warning">200+</div>
+                    <div class="text-muted small">Events Managed</div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="py-3 border-end">
+                    <div class="fs-2 fw-bold text-warning">1+</div>
+                    <div class="text-muted small">Years Experience</div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="py-3">
+                    <div class="fs-2 fw-bold text-warning">6</div>
+                    <div class="text-muted small">Event Types</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services List -->
+<section class="py-5" style="background:#f8f9fa;">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-4">What We Provide</h2>
+        <div class="row g-3 justify-content-center">
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="service-list-item">Wedding Planning</div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="service-list-item">Birthday Party Management</div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="service-list-item">Corporate Events</div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="service-list-item">Decoration &amp; Catering</div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="service-list-item">Sound &amp; Lighting Setup</div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-5">
+                <div class="service-list-item">Traditional Puja &amp; Havans Setup</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Gallery -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-4">Our Events</h2>
+        <div class="row g-4">
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="gallery-item shadow-sm">
+                    <img src="images/dinner img.jpg" alt="Dinner Events">
+                    <div class="gallery-caption">Dinner Events</div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="gallery-item shadow-sm">
+                    <img src="images/puja img.jpg" alt="Puja Decoration">
+                    <div class="gallery-caption">Puja Decoration</div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-4 mx-sm-auto">
+                <div class="gallery-item shadow-sm">
+                    <img src="images/surprise img.jpg" alt="Surprise Event">
+                    <div class="gallery-caption">Surprise Event</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing -->
+<section class="py-5" style="background:#f8f9fa;">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-5">Our Packages</h2>
+        <div class="row g-4 justify-content-center">
+
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="price-card shadow-sm">
+                    <div class="plan-name">Basic</div>
+                    <div class="price-amount">₹5000</div>
+                    <p class="text-muted mt-3 mb-4 small">Perfect for small gatherings.<br>Decoration &amp; basic setup included.</p>
+                    <a href="booking.html" class="btn btn-outline-warning w-100">Book Now</a>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="price-card featured shadow position-relative">
+                    <span class="badge bg-warning text-dark position-absolute top-0 start-50 translate-middle px-3">Popular</span>
+                    <div class="plan-name">Standard</div>
+                    <div class="price-amount">₹8000</div>
+                    <p class="text-secondary mt-3 mb-4 small">Ideal for parties &amp; functions.<br>Catering &amp; sound included.</p>
+                    <a href="booking.html" class="btn btn-warning w-100">Book Now</a>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-lg-4">
+                <div class="price-card shadow-sm">
+                    <div class="plan-name">Premium</div>
+                    <div class="price-amount">₹15000</div>
+                    <p class="text-muted mt-3 mb-4 small">Full event experience.<br>Lighting, catering &amp; more.</p>
+                    <a href="booking.html" class="btn btn-outline-warning w-100">Book Now</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section class="py-5">
+    <div class="container text-center">
+        <h2 class="fw-bold mb-4">Contact Us</h2>
+        <p class="fs-5 mb-1"><strong>📞</strong> +91 9876543210</p>
+        <p class="fs-5 mb-4"><strong>✉️</strong> events@email.com</p>
+        <a href="user_home.html" class="btn btn-dark px-4">← Back to Home</a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-dark text-light text-center py-3 mt-5">
+    <p class="mb-0">© 2026 Seva365 | All Rights Reserved</p>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
-

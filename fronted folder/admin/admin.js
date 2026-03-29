@@ -429,4 +429,3 @@ function getStatusPill(status) {
     return "<span class='status-pill pill-pending'>Pending</span>";
   }
 }
-

@@ -42,7 +42,6 @@ app.get("/", (req, res) => {
       return res.redirect("/user_home");
     }
   }
-
   // Not logged in → show index.html
   res.sendFile(path.join(frontendPath, "index.html"));
 });
@@ -78,6 +77,15 @@ app.get('/admin_user_page',isAuthenticated, (req, res)=>{
 });
 app.get('/admin_booking_page',isAuthenticated, (req, res)=>{
   res.sendFile(path.join(frontendPath, "admin/admin_booking_page.html"));
+});
+app.get('/admin_cooking', isAuthenticated, (req, res) => {
+  res.sendFile(path.join(frontendPath, "admin/admin_cooking.html"));
+});
+app.get('/admin_cleaning', isAuthenticated, (req, res) => {
+  res.sendFile(path.join(frontendPath, "admin/admin_cleaning.html"));
+});
+app.get('/admin_event_management', isAuthenticated, (req, res) => {
+  res.sendFile(path.join(frontendPath, "admin/admin_event_management.html"));
 });
 
 app.get("/logout", (req, res) => {
@@ -237,7 +245,6 @@ app.get("/all-bookings", (req, res) => {
             console.error(err);
             return res.status(500).json({ message: "Database error" });
         }
-
         res.json(results);
     });
 
@@ -255,7 +262,6 @@ app.get("/admin-users", (req, res) => {
             console.error(err);
             return res.status(500).json({ message: "Database error" });
         }
-
         res.json(results);
     });
 
@@ -334,10 +340,47 @@ app.patch("/admin/bookings/:id", (req, res) => {
     res.json({ message: `Booking ${status} successfully` });
   });
 });
+// Get only Cooking bookings
+app.get("/admin/cooking-bookings",  isAuthenticated, (req, res) => {
+    const query = "SELECT * FROM bookings WHERE service = 'Cooking'";
+
+    db.query(query, (err, result) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send("Error fetching cooking bookings");
+        }
+        res.json(result);
+    });
+});
+app.get("/admin/cleaning-bookings",  isAuthenticated, (req, res) => {
+    const query = "SELECT * FROM bookings WHERE service = 'Cleaning'";
+
+    db.query(query, (err, result) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send("Error fetching cleaning bookings");
+        }
+        res.json(result);
+    });
+});
+app.get("/admin/event-bookings",  isAuthenticated, (req, res) => {
+    const query = "SELECT * FROM bookings WHERE service = 'Event'";
+
+    db.query(query, (err, result) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).send("Error fetching Event bookings");
+        }
+        res.json(result);
+    });
+});
+module.exports = { app, db };
 
 // =======================
 // START SERVER
 // =======================
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
-});
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(3000, () => {
+    console.log("Server running on port 3000");
+  });
+}

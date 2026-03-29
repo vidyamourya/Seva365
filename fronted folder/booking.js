@@ -1,3 +1,4 @@
+console.log("Booking JS Loaded Successfully");
 document.addEventListener("DOMContentLoaded", function () {
 
   const serviceSelect = document.getElementById("service");
@@ -10,11 +11,14 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!form || !serviceSelect) return;
 
   // Disable Past Dates
+  
   const dateInput = document.getElementById("date");
+
   if (dateInput) {
     let today = new Date().toISOString().split("T")[0];
     dateInput.setAttribute("min", today);
   }
+
 
   // Service Change Event
   serviceSelect.addEventListener("change", function () {

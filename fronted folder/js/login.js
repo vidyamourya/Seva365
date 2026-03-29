@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (data.role === "admin") {
             window.location.href = "/admin";
         } else {
+            localStorage.setItem("userEmail", email);
             window.location.href = "user_home";
         }
       }else {

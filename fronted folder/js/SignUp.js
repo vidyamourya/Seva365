@@ -9,7 +9,7 @@ function signup() {
         return;
     }
 
-    // 🔥 Connect to backend
+    //  Connect to backend
     fetch("http://localhost:3000/signup", {
         method: "POST",
         headers: {
