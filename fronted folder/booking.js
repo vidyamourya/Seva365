@@ -11,14 +11,11 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!form || !serviceSelect) return;
 
   // Disable Past Dates
-  
   const dateInput = document.getElementById("date");
-
   if (dateInput) {
     let today = new Date().toISOString().split("T")[0];
     dateInput.setAttribute("min", today);
   }
-
 
   // Service Change Event
   serviceSelect.addEventListener("change", function () {
@@ -67,15 +64,20 @@ document.addEventListener("DOMContentLoaded", function () {
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
+    const name    = document.getElementById("name").value.trim();
+    const email   = document.getElementById("email").value.trim();
+    const phone   = document.getElementById("phone").value.trim();
     const service = serviceSelect.value;
     const subService = subServiceSelect.value;
-    const date = document.getElementById("date").value;
+    const date    = document.getElementById("date").value;
     const message = document.getElementById("message")?.value.trim() || "";
 
-    if (!name || !email || !phone || !service || !date) {
+    // ── New fields ──
+    const time    = document.getElementById("time").value;
+    const city    = document.getElementById("city").value.trim();
+    const address = document.getElementById("address").value.trim();
+
+    if (!name || !email || !phone || !service || !date || !time || !city || !address) {
       alert("Please fill all required fields!");
       return;
     }
@@ -92,13 +94,16 @@ document.addEventListener("DOMContentLoaded", function () {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        name: name,
-        email: email,
-        phone: phone,
-        service: service,
+        name,
+        email,
+        phone,
+        service,
         sub_service: subService,
         booking_date: date,
-        message: message
+        message,
+        preferred_time: time,   
+        city,                  
+        address                
       })
     })
     .then(response => response.text())

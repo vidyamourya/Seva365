@@ -35,7 +35,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         <td>${booking.name}</td>
                         <td>${booking.service}</td>
                         <td>${booking.sub_service}</td>
-                        <td>${booking.booking_date}</td>
+                        <td>${booking.booking_date.split('T')[0]}</td>
+                        <td>${booking.preferred_time}</td>
+                        <td>${booking.address}</td>
+                        <td>${booking.city}</td>
                     </tr>
                 `;
             });
@@ -73,7 +76,10 @@ fetch("/admin/cooking-bookings")
                 <td>${booking.id}</td>
                 <td>${booking.name}</td>
                 <td>${booking.sub_service}</td>
-                <td>${booking.booking_date}</td>
+                <td>${booking.booking_date.split('T')[0]}</td>
+                <td>${booking.preferred_time}</td>
+                <td>${booking.address}</td>
+                <td>${booking.city}</td>
             </tr>
         `;
     });
@@ -92,7 +98,10 @@ fetch("/admin/cleaning-bookings")
                 <td>${booking.id}</td>
                 <td>${booking.name}</td>
                 <td>${booking.sub_service}</td>
-                <td>${booking.booking_date}</td>
+                <td>${booking.booking_date.split('T')[0]}</td>
+                <td>${booking.preferred_time}</td>
+                <td>${booking.address}</td>
+                <td>${booking.city}</td>
             </tr>
         `;
     });
@@ -111,7 +120,10 @@ fetch("/admin/event-bookings")
                 <td>${booking.id}</td>
                 <td>${booking.name}</td>
                 <td>${booking.sub_service}</td>
-                <td>${booking.booking_date}</td>
+                <td>${booking.booking_date.split('T')[0]}</td>
+                <td>${booking.preferred_time}</td>
+                <td>${booking.address}</td>
+                <td>${booking.city}</td>
             </tr>
         `;
     });

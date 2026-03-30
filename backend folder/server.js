@@ -124,22 +124,32 @@ db.connect((err) => {
 // Booking API
 // =======================
 app.post("/book", (req, res) => {
-  const { name, email, phone, service, sub_service, booking_date, message } = req.body;
-
+  console.log(req.body);
+  const {
+    name, email, phone,
+    service, sub_service,
+    booking_date, message,
+    preferred_time, city, address   // ── new fields
+  } = req.body;
+ 
   const sql = `
     INSERT INTO bookings 
-    (name, email, phone, service, sub_service, booking_date, message) 
-    VALUES (?, ?, ?, ?, ?, ?, ?)
+    (name, email, phone, service, sub_service, booking_date, message, preferred_time, city, address) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
-
-  db.query(sql, [name, email, phone, service, sub_service, booking_date, message], (err, result) => {
-    if (err) {
-      console.error("Insert error:", err);
-      res.status(500).send("Error saving booking");
-    } else {
-      res.send("Booking saved successfully");
+ 
+  db.query(
+    sql,
+    [name, email, phone, service, sub_service, booking_date, message, preferred_time, city, address],
+    (err, result) => {
+      if (err) {
+        console.error("Insert error:", err);
+        res.status(500).send("Error saving booking");
+      } else {
+        res.send("Booking saved successfully");
+      }
     }
-  });
+  );
 });
 
 // =======================
@@ -304,7 +314,10 @@ app.get("/admin/bookings", (req, res) => {
       sub_service,
       booking_date,
       message,
-      status
+      status,
+      preferred_time,
+      city,
+      address
     FROM bookings
     ORDER BY id DESC
   `;
