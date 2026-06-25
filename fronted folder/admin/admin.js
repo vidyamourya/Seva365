@@ -289,16 +289,25 @@ function updatePendingBadge() {
   for (var i = 0; i < allBookings.length; i++) {
     if (allBookings[i].status === "pending") count++;
   }
-  document.getElementById("pendingBadge").textContent = count;
 
-  // Show red dot on bell if pending bookings exist
-  var dot = document.getElementById("notifDot");
-  if (dot) {
-    if (count > 0) {
-      dot.style.display = "block";
-    } else {
-      dot.style.display = "none";
-    }
+  var lastSeenCount = parseInt(localStorage.getItem("lastSeenPendingCount") || "0");
+  var badge = document.getElementById("pendingBadge");
+
+  if (count > lastSeenCount) {
+    // New bookings arrived — show badge with count of NEW ones only
+    badge.textContent = count - lastSeenCount;
+    badge.style.display = "inline-block";
+  } else {
+    // No new bookings — hide badge completely
+    badge.style.display = "none";
+  }
+
+  // When admin clicks All Bookings, mark current count as seen
+  var bookingLink = document.querySelector("[onclick*='admin_booking_page']");
+  if (bookingLink) {
+    bookingLink.addEventListener("click", function () {
+      localStorage.setItem("lastSeenPendingCount", count);
+    });
   }
 }
 

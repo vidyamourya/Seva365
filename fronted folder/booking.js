@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       subServiceGroup.style.display = "block";
       subServiceLabel.textContent = "Type of Cleaning";
-      addOptions(["Laundary and Home Cleaning", "Kitchen Cleaning", "Sanitization services"]);
+      addOptions(["Kitchen and Home Deep Cleaning", "Laundry and Sofa & Carpet Cleaning", "Sanitization services"]);
 
     } else if (service === "Cooking") {
 
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       subServiceGroup.style.display = "block";
       subServiceLabel.textContent = "Type of Event";
-      addOptions(["Dinner", "Puja", "Surprise Event"]);
+      addOptions(["Corporate Events", "Puja Decoration", "Party Event"]);
 
     } else {
       subServiceGroup.style.display = "none";

@@ -6,6 +6,17 @@ const bcrypt = require("bcrypt");
 const path = require("path");
 const frontendPath = path.join(__dirname, "../fronted folder");
 const app = express();
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: "vidyamauryazzz@gmail.com",      // your real Gmail here
+    pass: "mrurngwmsznfhrld"          // the 16 chars i copied (no spaces)
+  }
+});
 
 // Middleware
 app.use(cors());
@@ -336,21 +347,81 @@ app.get("/admin/bookings", (req, res) => {
 // =======================
 app.patch("/admin/bookings/:id", (req, res) => {
   const { id } = req.params;
-  const { status } = req.body; // 'accepted' or 'denied'
+  const { status } = req.body;
 
-  // Safety check — only allow valid values
   if (!["accepted", "denied"].includes(status)) {
     return res.status(400).json({ message: "Invalid status value" });
   }
 
-  const sql = "UPDATE bookings SET status = ? WHERE id = ?";
+  // Step 1 — Update status in DB
+  const updateSQL = "UPDATE bookings SET status = ? WHERE id = ?";
 
-  db.query(sql, [status, id], (err, result) => {
+  db.query(updateSQL, [status, id], (err, result) => {
     if (err) {
       console.error("Update error:", err);
       return res.status(500).json({ message: "Server error" });
     }
-    res.json({ message: `Booking ${status} successfully` });
+
+    // Step 2 — Fetch booking details to get customer email
+    const fetchSQL = "SELECT * FROM bookings WHERE id = ?";
+
+    db.query(fetchSQL, [id], (err2, rows) => {
+      if (err2 || rows.length === 0) {
+        return res.json({ message: `Booking ${status} successfully` });
+      }
+
+      const booking = rows[0];
+
+      // Step 3 — Build email
+      const subject = status === "accepted"
+        ? "✅ Your Seva365 Booking is Confirmed!"
+        : "❌ Your Seva365 Booking was Declined";
+
+      const message = status === "accepted"
+        ? `
+          <h2 style="color:#10b981;">Booking Confirmed! ✅</h2>
+          <p>Dear <strong>${booking.name}</strong>,</p>
+          <p>Your booking has been <strong>accepted</strong> by our team.</p>
+          <hr/>
+          <p><strong>Service:</strong> ${booking.service}</p>
+          <p><strong>Sub Service:</strong> ${booking.sub_service}</p>
+          <p><strong>Date:</strong> ${new Date(booking.booking_date).toDateString()}</p>
+          <p><strong>Preferred Time:</strong> ${booking.preferred_time}</p>
+          <p><strong>Address:</strong> ${booking.address}, ${booking.city}</p>
+          <hr/>
+          <p>Thank you for choosing <strong>Seva365</strong>!</p>
+        `
+        : `
+          <h2 style="color:#ef4444;">Booking Declined ❌</h2>
+          <p>Dear <strong>${booking.name}</strong>,</p>
+          <p>Unfortunately your booking has been <strong>declined</strong>.</p>
+          <hr/>
+          <p><strong>Service:</strong> ${booking.service}</p>
+          <p><strong>Sub Service:</strong> ${booking.sub_service}</p>
+          <p><strong>Date:</strong> ${new Date(booking.booking_date).toDateString()}</p>
+          <hr/>
+          <p>Please contact us if you have any questions.</p>
+          <p>— <strong>Seva365 Team</strong></p>
+        `;
+
+      // Step 4 — Send email
+      const mailOptions = {
+        from: "vidyamauryazzz@gmail.com",    // your Gmail here
+        to: booking.email,
+        subject: subject,
+        html: message
+      };
+
+      transporter.sendMail(mailOptions, (mailErr, info) => {
+        if (mailErr) {
+          console.error("Email error:", mailErr);
+          return res.json({ message: `Booking ${status} but email failed` });
+        }
+        console.log("Email sent:", info.response);
+        res.json({ message: `Booking ${status} and email sent!` });
+      });
+
+    });
   });
 });
 // Get only Cooking bookings
@@ -388,6 +459,7 @@ app.get("/admin/event-bookings",  isAuthenticated, (req, res) => {
     });
 });
 module.exports = { app, db };
+
 
 // =======================
 // START SERVER

@@ -33,8 +33,8 @@
   <div class="sidebar-label">Main</div>
   <div class="nav-item active"><span class="nav-icon">📊</span> Dashboard</div>
   <div class="nav-item" onclick="window.location.href='/admin_booking_page'">
-    <span class="nav-icon">📋</span> All Bookings 
-    <span class="nav-badge" id="pendingBadge">0</span>
+    <span class="nav-icon">📋</span> All Bookings
+    <span class="nav-badge" id="pendingBadge" style="display:none"></span>
   </div>
 
   <div class="nav-item" onclick="window.location.href='/admin_user_page'">
@@ -76,9 +76,6 @@
     <div class="topbar-title">Admin <span>Dashboard</span></div>
     <div class="topbar-right">
       <span class="topbar-date" id="dateDisplay"></span>
-      <button class="notif-btn" id="notifyBtn">🔔
-        <span class="notif-dot" id="notifDot" style="display:none"></span>
-      </button>
     </div>
   </div>
 
@@ -100,6 +97,20 @@
     </table>
 
 </div>
+<script>
+       // Auto-highlight correct sidebar item
+       var path = window.location.pathname;
+       document.querySelectorAll(".nav-item").forEach(function(item) {
+       item.classList.remove("active");
+       });
+       if (path === "/admin") document.querySelectorAll(".nav-item")[0].classList.add("active");
+       if (path === "/admin_booking_page") document.querySelectorAll(".nav-item")[1].classList.add("active");
+       if (path === "/admin_user_page") document.querySelectorAll(".nav-item")[2].classList.add("active");
+       if (path === "/admin_cooking") document.querySelectorAll(".nav-item")[3].classList.add("active");
+       if (path === "/admin_cleaning") document.querySelectorAll(".nav-item")[4].classList.add("active");
+       if (path === "/admin_event_management") document.querySelectorAll(".nav-item")[5].classList.add("active");
+</script>
+<script src="../admin/admin.js"></script>
 <script src="..\js\scripts.js"></script>
 </body>
 </html>
